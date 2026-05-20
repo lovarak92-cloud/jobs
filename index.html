@@ -633,7 +633,7 @@ function renderJobs(){
           <button class="jbtn saved-btn ${savedJobs.has(j.id)?'on':''}" onclick="toggleSave(${j.id})">
             <i class="ti ti-heart" style="font-size:13px"></i>${savedJobs.has(j.id)?'Sauvegardé':'Sauvegarder'}
           </button>
-          <button class="jbtn apply" onclick="event.stopPropagation();openRedirect('${j.url}','${j.src}','${j.title}')">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
+          <button class="jbtn apply" onclick="event.stopPropagation();openRedirect('${j.url}','${j.src}',`${j.title}`)">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
         </div>
       </div>
     </div>
@@ -813,9 +813,11 @@ setInterval(()=>{toast(newJobAlerts[alertIdx%newJobAlerts.length].msg,newJobAler
 // CHECK ACCESS
 (function(){
   var access = localStorage.getItem('jobrapide_access');
+  var pw = document.getElementById('paywall');
   if(access === 'granted'){
-    var pw = document.getElementById('paywall');
     if(pw) pw.style.display = 'none';
+  } else {
+    if(pw) pw.style.display = 'flex';
   }
 })();
 
@@ -830,34 +832,50 @@ setTimeout(()=>renderJobs(),600);
 
 // ── REDIRECT ──
 let _redirectUrl='';
-let _redirectSrc='';
 
 function openRedirect(url, src, title){
   _redirectUrl = url;
-  _redirectSrc = src;
-  document.getElementById('modal-inner').innerHTML = 
+  var j = JOBS.find(function(x){ return x.title===title; });
+  var contacts = j && j.contacts ? j.contacts : [];
+  
+  var contactIcons = {email:'ti-mail', phone:'ti-phone', facebook:'ti-brand-facebook', whatsapp:'ti-brand-whatsapp', telegram:'ti-brand-telegram', instagram:'ti-brand-instagram', web:'ti-external-link'};
+  var contactColors = {email:'#C1272D', phone:'#0D7A4E', facebook:'#1877F2', whatsapp:'#25D366', telegram:'#229ED9', instagram:'#E4405F', web:'#1A5FA8'};
+  var contactActions = {
+    email: function(v){ window.location.href='mailto:'+v; },
+    phone: function(v){ window.location.href='tel:'+v; },
+    facebook: function(v){ window.open(v,'_blank'); },
+    whatsapp: function(v){ window.open(v,'_blank'); },
+    telegram: function(v){ window.open(v,'_blank'); },
+    instagram: function(v){ window.open(v,'_blank'); },
+    web: function(v){ window.open(v,'_blank'); }
+  };
+  window._contactActions = contactActions;
+  window._contactData = contacts;
+
+  var btns = contacts.map(function(c, i){
+    var icon = contactIcons[c.type] || 'ti-link';
+    var color = contactColors[c.type] || '#333';
+    return '<button onclick="window._contactActions[window._contactData['+i+'].type](window._contactData['+i+'].val)" style="width:100%;background:white;border:1.5px solid '+color+';border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;color:'+color+';display:flex;align-items:center;gap:10px;font-family:var(--font);margin-bottom:8px"><i class="ti '+icon+'" style="font-size:18px"></i>'+c.label+'</button>';
+  }).join('');
+
+  document.getElementById('modal-inner').innerHTML =
     '<div style="padding:1rem">' +
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">' +
-    '<h2 style="font-size:18px;font-weight:700">Postuler</h2>' +
+    '<h2 style="font-size:18px;font-weight:700">Contacter le recruteur</h2>' +
     '<button onclick="closeModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999">&times;</button>' +
     '</div>' +
-    '<p style="font-size:14px;color:#666;margin-bottom:1rem">Offre sur <strong>' + src + '</strong> :</p>' +
-    '<p style="font-size:14px;font-weight:600;color:#333;background:#f5f5f5;padding:12px;border-radius:8px;margin-bottom:1.5rem">' + title + '</p>' +
-    '<button onclick="doRedirect()" style="width:100%;background:#C1272D;color:white;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px">Ouvrir ' + src + ' &rarr;</button>' +
-    '<button onclick="copyLink()" style="width:100%;background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:10px;padding:12px;font-size:14px;font-weight:600;cursor:pointer">Copier le lien</button>' +
+    '<div style="background:#f5f5f5;border-radius:10px;padding:12px;margin-bottom:1.25rem">' +
+    '<div style="font-size:13px;font-weight:700;color:#333">' + title + '</div>' +
+    '<div style="font-size:12px;color:#666;margin-top:3px">Source : ' + src + '</div>' +
+    '</div>' +
+    '<div style="font-size:12px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Choisir un moyen de contact</div>' +
+    btns +
     '</div>';
   document.getElementById('modal-bg').classList.add('open');
 }
 
-function doRedirect(){ 
-  window.open(_redirectUrl, '_blank'); 
-  closeModal(); 
-}
-
-function copyLink(){ 
-  navigator.clipboard.writeText(_redirectUrl); 
-  toast('Lien copié !', 'success'); 
-}
+function doRedirect(){ window.open(_redirectUrl,'_blank'); closeModal(); }
+function copyLink(){ navigator.clipboard.writeText(_redirectUrl); toast('Lien copié !','success'); }
 
 // ── PAYWALL ──
 function copyNum(){navigator.clipboard.writeText('0344252324').then(()=>toast('Numéro MVola copié !','success')).catch(()=>{});const btn=document.querySelector('.copy-btn');btn.innerHTML='<i class="ti ti-check" style="font-size:13px"></i>Copié !';setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" style="font-size:13px"></i>Copier';},2000);}
@@ -903,4 +921,3 @@ function confirmPayment(){
 </script>
 </body>
 </html>
-
