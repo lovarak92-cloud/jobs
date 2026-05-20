@@ -633,7 +633,7 @@ function renderJobs(){
           <button class="jbtn saved-btn ${savedJobs.has(j.id)?'on':''}" onclick="toggleSave(${j.id})">
             <i class="ti ti-heart" style="font-size:13px"></i>${savedJobs.has(j.id)?'Sauvegardé':'Sauvegarder'}
           </button>
-          <button class="jbtn apply" onclick="event.stopPropagation();openRedirect('${j.url}','${j.src}',`${j.title}`)">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
+          <button class="jbtn apply" onclick="event.stopPropagation();openRedirect('${j.url}','${j.src}','${j.title}')">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
         </div>
       </div>
     </div>
@@ -835,7 +835,7 @@ let _redirectUrl='';
 
 function openRedirect(url, src, title){
   _redirectUrl = url;
-  var j = JOBS.find(function(x){ return x.title===title; });
+  var j = JOBS.find(function(x){ return x.title===title || x.url===url; });
   var contacts = j && j.contacts ? j.contacts : [];
   
   var contactIcons = {email:'ti-mail', phone:'ti-phone', facebook:'ti-brand-facebook', whatsapp:'ti-brand-whatsapp', telegram:'ti-brand-telegram', instagram:'ti-brand-instagram', web:'ti-external-link'};
