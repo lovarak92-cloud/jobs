@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Job Rapide — Emploi Madagascar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
+<style>
+:root {
+  --red:#C1272D; --red2:#A01E23; --red-bg:#FDF1F1;
+  --green:#0D7A4E; --green-bg:#E8F5F0;
+  --amber:#B87333; --amber-bg:#FDF5E8;
+  --blue:#1A5FA8; --blue-bg:#EBF3FC;
+  --purple:#5B3DB8; --purple-bg:#F0EDFB;
+  --bg:#F7F5F2; --surface:#FFFFFF; --surface2:#F2EFE9;
+  --text:#18160F; --text2:#5A5650; --text3:#9E998F;
+  --border:rgba(24,22,15,0.10); --border2:rgba(24,22,15,0.06);
+  --r:10px; --r-lg:16px; --r-xl:22px;
+  --font:'Plus Jakarta Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--red);color:white;font-size:12px;padding:6px 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.topbar-left span{opacity:.85;display:flex;align-items:center;gap:5px}
+.live-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── NAV ── */
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-icon{width:38px;height:38px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:18px}
+.brand-name{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);font-weight:700;letter-spacing:-.3px}
+.brand-name span{color:var(--red)}
+.nav-center{display:flex;gap:4px}
+.nav-link{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border:none;background:none;font-family:var(--font);transition:.15s;display:flex;align-items:center;gap:6px}
+.nav-link:hover,.nav-link.active{background:var(--surface2);color:var(--text)}
+.nav-link.active{color:var(--red)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn{font-family:var(--font);cursor:pointer;font-weight:600;border-radius:var(--r);border:none;display:inline-flex;align-items:center;gap:7px;transition:.15s}
+.btn-outline{background:none;border:1px solid var(--border);color:var(--text2);padding:8px 16px;font-size:13px}
+.btn-outline:hover{border-color:var(--text3);color:var(--text)}
+.btn-primary{background:var(--red);color:white;padding:9px 18px;font-size:13px}
+.btn-primary:hover{background:var(--red2)}
+.notif-bell{position:relative;width:38px;height:38px;border-radius:9px;border:1px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2)}
+.notif-bell .badge{position:absolute;top:-4px;right:-4px;width:17px;height:17px;background:var(--red);border-radius:50%;color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid white}
+
+/* ── HERO ── */
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 0}
+.hero-inner{max-width:1160px;margin:0 auto}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;margin-bottom:1.5rem}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;line-height:1.18;color:var(--text);margin-bottom:8px}
+.hero-text h1 em{color:var(--red);font-style:normal}
+.hero-text p{font-size:15px;color:var(--text2);line-height:1.6;max-width:480px}
+.hero-stats{display:flex;gap:1px;background:var(--border);border-radius:var(--r-lg);overflow:hidden;flex-shrink:0;border:1px solid var(--border)}
+.hstat{background:var(--surface);padding:16px 22px;text-align:center}
+.hstat-val{font-size:22px;font-weight:800;color:var(--text);display:block}
+.hstat-lbl{font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.05em}
+.hstat-lbl.green{color:var(--green)}
+
+/* SEARCH */
+.search-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-xl);padding:14px;display:flex;gap:8px;align-items:center;margin-bottom:1.5rem}
+.search-wrap input,.search-wrap select{border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;font-size:14px;color:var(--text);background:var(--surface);font-family:var(--font);outline:none;transition:border-color .15s}
+.search-wrap input:focus,.search-wrap select:focus{border-color:var(--red)}
+.search-wrap input{flex:1}
+.search-wrap select{width:160px}
+.btn-search{background:var(--red);color:white;border:none;border-radius:var(--r);padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:8px;white-space:nowrap;transition:.15s}
+.btn-search:hover{background:var(--red2)}
+
+/* SOURCES BAR */
+.sources-bar{display:flex;gap:6px;overflow-x:auto;padding-bottom:0;scrollbar-width:none}
+.sources-bar::-webkit-scrollbar{display:none}
+.src-pill{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);white-space:nowrap;transition:.15s;user-select:none;flex-shrink:0}
+.src-pill i{font-size:15px}
+.src-pill:hover{border-color:var(--text3)}
+.src-pill.on{border-color:transparent;color:white}
+.src-pill.on.fb{background:#1877F2}
+.src-pill.on.li{background:#0A66C2}
+.src-pill.on.bj{background:var(--red)}
+.src-pill.on.em{background:#0D7A4E}
+.src-pill.on.mj{background:#5B3DB8}
+.src-pill.on.on{background:#E84393}
+.src-pill.on.oi{background:#B87333}
+.src-pill.on.te{background:#229ED9}
+.src-pill.on.wh{background:#25D366}
+.src-pill.on.in{background:#E4405F}
+.src-pill.on.tw{background:#1DA1F2}
+.src-pill.on.go{background:#4285F4}
+.src-pill.on.ne{background:#F04E23}
+.src-pill.on.of{background:#2496BE}
+.src-src-bar-wrap{border-top:1px solid var(--border);padding:12px 0 0}
+
+/* ── MAIN LAYOUT ── */
+.main-wrap{max-width:1160px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:1fr 330px;gap:1.5rem}
+
+/* ── JOB CARDS ── */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-head h2{font-size:16px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.section-head .count{font-size:12px;font-weight:600;background:var(--red-bg);color:var(--red);padding:3px 9px;border-radius:999px}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.fchip{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:.15s;user-select:none}
+.fchip:hover:not(.active){border-color:var(--text3)}
+.fchip.active{background:var(--text);color:white;border-color:var(--text)}
+.jobs-list{display:flex;flex-direction:column;gap:10px}
+
+.jcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.25rem;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.jcard:hover{border-color:rgba(24,22,15,.2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.jcard.isnew::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+.jcard-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.jlogo{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:white;flex-shrink:0;letter-spacing:-.5px}
+.jinfo{flex:1;min-width:0}
+.jtitle{font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jcompany{font-size:13px;color:var(--text2)}
+.jcard-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:7px;font-size:11px;font-weight:600}
+.tag-new{background:var(--red-bg);color:var(--red)}
+.tag-loc{background:var(--surface2);color:var(--text2)}
+.tag-ctr{background:var(--green-bg);color:var(--green)}
+.tag-sal{background:var(--amber-bg);color:var(--amber)}
+.tag-src{background:var(--blue-bg);color:var(--blue)}
+.tag-src i{font-size:12px}
+.jdesc{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.jcard-foot{display:flex;align-items:center;justify-content:space-between}
+.jtime{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:4px}
+.jactions{display:flex;gap:7px}
+.jbtn{font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;border-radius:8px;padding:7px 14px;transition:.15s;display:flex;align-items:center;gap:5px;border:1px solid var(--border);background:none;color:var(--text2)}
+.jbtn:hover{border-color:var(--text3)}
+.jbtn.apply{background:var(--red);color:white;border-color:var(--red)}
+.jbtn.apply:hover{background:var(--red2)}
+.jbtn.saved-btn.on{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}
+
+.load-more{width:100%;border:1.5px dashed var(--border);border-radius:var(--r-lg);padding:14px;font-size:14px;font-weight:600;color:var(--text3);cursor:pointer;background:none;font-family:var(--font);margin-top:10px;transition:.15s}
+.load-more:hover{border-color:var(--text3);color:var(--text2)}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.25rem}
+.scard h3{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.scard h3 i{font-size:17px}
+
+/* ALERT FORM */
+.aform-group{margin-bottom:10px}
+.aform-group label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.aform-group input,.aform-group select{width:100%;border:1px solid var(--border);border-radius:var(--r);padding:9px 12px;font-size:13px;color:var(--text);background:var(--bg);font-family:var(--font);outline:none;transition:.15s}
+.aform-group input:focus,.aform-group select:focus{border-color:var(--red)}
+.channels-heading{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.ch-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px}
+.chbtn{border:1px solid var(--border);border-radius:9px;padding:9px 5px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;background:var(--bg);transition:.15s;user-select:none}
+.chbtn i{font-size:18px;color:var(--text3)}
+.chbtn span{font-size:10px;font-weight:600;color:var(--text3)}
+.chbtn.on{border-color:transparent}
+.chbtn.on.email{background:#FDF1F1;border-color:#C1272D}.chbtn.on.email i,.chbtn.on.email span{color:#C1272D}
+.chbtn.on.sms{background:var(--green-bg);border-color:var(--green)}.chbtn.on.sms i,.chbtn.on.sms span{color:var(--green)}
+.chbtn.on.whatsapp{background:#E8F8EE;border-color:#25D366}.chbtn.on.whatsapp i,.chbtn.on.whatsapp span{color:#128C4A}
+.chbtn.on.telegram{background:#E8F5FD;border-color:#229ED9}.chbtn.on.telegram i,.chbtn.on.telegram span{color:#229ED9}
+.chbtn.on.push{background:var(--amber-bg);border-color:var(--amber)}.chbtn.on.push i,.chbtn.on.push span{color:var(--amber)}
+.chbtn.on.messenger{background:#EBF3FC;border-color:#1877F2}.chbtn.on.messenger i,.chbtn.on.messenger span{color:#1877F2}
+
+.btn-sub{width:100%;background:var(--red);color:white;border:none;border-radius:var(--r);padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:7px;transition:.15s}
+.btn-sub:hover{background:var(--red2)}
+
+/* MY ALERTS LIST */
+.alert-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border2)}
+.alert-item:last-child{border-bottom:none}
+.alert-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--green)}
+.alert-item-info{flex:1;min-width:0}
+.alert-item-title{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.alert-item-ch{font-size:11px;color:var(--text3)}
+.alert-del{background:none;border:none;cursor:pointer;color:var(--text3);padding:4px;border-radius:6px;transition:.15s}
+.alert-del:hover{color:var(--red);background:var(--red-bg)}
+
+/* SOURCE MONITOR */
+.srcmon-item{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border2)}
+.srcmon-item:last-child{border-bottom:none}
+.srcmon-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.srcmon-name{flex:1;font-size:13px;color:var(--text);font-weight:500}
+.srcmon-count{font-size:12px;color:var(--text3)}
+.srcmon-status{width:7px;height:7px;border-radius:50%}
+.srcmon-status.ok{background:#4ade80}
+.srcmon-status.slow{background:#fbbf24}
+.srcmon-status.off{background:#f87171}
+
+/* TOAST */
+.toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{background:var(--text);color:white;padding:11px 16px;border-radius:11px;font-size:13px;display:flex;align-items:center;gap:10px;max-width:340px;pointer-events:all;animation:tin .3s ease}
+.toast.success{background:var(--green)}
+.toast.info{background:var(--blue)}
+.toast.warn{background:var(--amber)}
+@keyframes tin{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes tout{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--surface);border-radius:var(--r-xl);padding:2rem;max-width:500px;width:95%;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem}
+.modal-header h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;line-height:1.2}
+.modal-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--text3);line-height:1;margin-top:-4px}
+
+/* JOB DETAIL */
+.jd-section{margin-bottom:1.25rem}
+.jd-section h4{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.jd-section p{font-size:14px;color:var(--text2);line-height:1.7}
+.jd-tags{display:flex;flex-wrap:wrap;gap:7px}
+.apply-ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.apply-ch-btn{border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--bg);transition:.15s;font-family:var(--font);font-size:13px;font-weight:600;color:var(--text2)}
+.apply-ch-btn:hover{border-color:var(--text3);color:var(--text)}
+.apply-ch-btn i{font-size:20px}
+
+/* NOTIF PANEL */
+.notif-panel{position:absolute;top:54px;right:1.5rem;width:340px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:0 8px 30px rgba(0,0,0,.12);z-index:250;display:none}
+.notif-panel.open{display:block}
+.notif-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.notif-head span{font-size:14px;font-weight:700}
+.notif-clear{font-size:12px;color:var(--red);cursor:pointer;background:none;border:none;font-family:var(--font);font-weight:600}
+.notif-item{padding:12px 16px;border-bottom:1px solid var(--border2);display:flex;gap:10px;align-items:flex-start;cursor:pointer;transition:.1s}
+.notif-item:hover{background:var(--bg)}
+.notif-item:last-child{border-bottom:none}
+.notif-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.notif-txt{flex:1}
+.notif-txt strong{font-size:13px;font-weight:600;color:var(--text);display:block}
+.notif-txt span{font-size:12px;color:var(--text2)}
+.notif-time{font-size:11px;color:var(--text3);margin-top:3px}
+.notif-unread{width:8px;height:8px;background:var(--red);border-radius:50%;margin-top:4px;flex-shrink:0}
+
+@media(max-width:900px){
+  .main-wrap{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .hero-stats{display:none}
+  .hero-text h1{font-size:26px}
+}
+
+/* ── PAYWALL ── */
+#paywall{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1a0a0a 0%,#2d0f0f 40%,#1a0a0a 100%);display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:1rem}
+.pw-card{background:#fff;border-radius:24px;max-width:440px;width:100%;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.pw-header{background:linear-gradient(135deg,#C1272D 0%,#8B0000 100%);padding:2rem 2rem 1.5rem;text-align:center;position:relative}
+.pw-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:20px;background:white;border-radius:50% 50% 0 0 / 100% 100% 0 0}
+.pw-logo{width:56px;height:56px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:26px}
+.pw-header h1{font-family:'Playfair Display',serif;font-size:24px;color:white;font-weight:800;margin-bottom:4px}
+.pw-header p{color:rgba(255,255,255,.8);font-size:13px}
+.pw-body{padding:1.5rem 2rem 2rem}
+.pw-price-box{background:linear-gradient(135deg,#FFF8E7,#FFF3D4);border:2px solid #B87333;border-radius:16px;padding:1.25rem;text-align:center;margin-bottom:1.5rem}
+.pw-price-box .label{font-size:12px;font-weight:700;color:#B87333;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.pw-price-box .amount{font-size:38px;font-weight:800;color:#18160F;font-family:'Playfair Display',serif;line-height:1}
+.pw-price-box .unit{font-size:14px;color:#5A5650;margin-top:4px}
+.pw-price-box .once{font-size:12px;color:#0D7A4E;font-weight:600;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:4px}
+.mvola-box{background:#FFF5F5;border:1.5px solid #C1272D;border-radius:14px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:14px}
+.mvola-icon{width:44px;height:44px;background:linear-gradient(135deg,#E40000,#FF6600);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;flex-shrink:0}
+.mvola-info{flex:1}
+.mvola-info .mtitle{font-size:13px;font-weight:700;color:#18160F}
+.mvola-info .num{font-size:20px;font-weight:800;color:#C1272D;letter-spacing:.5px;margin:2px 0}
+.mvola-info .sub{font-size:11px;color:#9E998F}
+.copy-btn{background:#FDF1F1;border:1px solid rgba(193,39,45,.3);border-radius:8px;padding:6px 10px;color:#C1272D;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px;transition:.15s}
+.copy-btn:hover{background:#C1272D;color:white}
+.pw-steps{margin-bottom:1.5rem}
+.pw-steps h4{font-size:11px;font-weight:700;color:#9E998F;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.step{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.step-num{width:22px;height:22px;background:#C1272D;border-radius:50%;color:white;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-txt{font-size:13px;color:#5A5650;line-height:1.5}
+.step-txt strong{color:#18160F}
+.pw-divider{display:flex;align-items:center;gap:10px;margin:1.25rem 0;color:#9E998F;font-size:12px}
+.pw-divider::before,.pw-divider::after{content:'';flex:1;height:1px;background:rgba(24,22,15,0.10)}
+.pf-group{margin-bottom:10px}
+.pf-group label{font-size:11px;font-weight:700;color:#9E998F;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.pf-group input{width:100%;border:1.5px solid rgba(24,22,15,0.10);border-radius:10px;padding:11px 14px;font-size:14px;color:#18160F;background:#F7F5F2;font-family:var(--font);outline:none;transition:.15s}
+.pf-group input:focus{border-color:#C1272D}
+.btn-pay{width:100%;background:linear-gradient(135deg,#C1272D,#8B0000);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:9px;transition:.15s;margin-top:14px;letter-spacing:.02em}
+.btn-pay:hover{opacity:.92;transform:translateY(-1px)}
+.btn-pay:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.pw-footer{text-align:center;margin-top:12px;font-size:12px;color:#9E998F;line-height:1.6}
+#pay-pending{display:none;text-align:center;padding:1rem 0}
+.pending-spinner{width:64px;height:64px;border:4px solid rgba(24,22,15,0.10);border-top-color:#C1272D;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1.25rem}
+#pay-success{display:none;text-align:center;padding:1rem 0}
+.success-circle{width:72px;height:72px;background:#E8F5F0;border:3px solid #0D7A4E;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;animation:popIn .4s ease}
+@keyframes popIn{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+</style>
+</head>
+<body>
+
+<!-- ══ PAYWALL ══ -->
+<div id="paywall">
+  <div class="pw-card">
+    <div class="pw-header">
+      <div class="pw-logo">⚡</div>
+      <h1>Job Rapide</h1>
+      <p>Accès complet à toutes les offres d'emploi Madagascar</p>
+    </div>
+    <div class="pw-body">
+
+      <!-- PRICE -->
+      <div class="pw-price-box">
+        <div class="label">Accès unique</div>
+        <div class="amount">2 000</div>
+        <div class="unit">Ariary — paiement unique, accès à vie</div>
+        <div class="once"><i class="ti ti-check" style="font-size:13px"></i> Aucun abonnement mensuel</div>
+      </div>
+
+      <!-- MVOLA -->
+      <div class="mvola-box">
+        <div class="mvola-icon"><i class="ti ti-device-mobile" style="font-size:20px"></i></div>
+        <div class="mvola-info">
+          <div class="mtitle">Payer via MVola</div>
+          <div class="num">034 42 523 24</div>
+          <div class="sub">Nom : Job Rapide · Montant : 2 000 Ar</div>
+        </div>
+        <button class="copy-btn" onclick="copyNum()"><i class="ti ti-copy" style="font-size:13px"></i>Copier</button>
+      </div>
+
+      <!-- STEPS -->
+      <div class="pw-steps">
+        <h4>Comment payer ?</h4>
+        <div class="step"><div class="step-num">1</div><div class="step-txt">Ouvrez votre application <strong>MVola</strong> ou composez <strong>#111#</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-txt">Envoyez <strong>2 000 Ar</strong> au numéro <strong>034 42 523 24</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-txt">Notez le <strong>code de transaction MVola</strong> reçu par SMS</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-txt">Remplissez le formulaire ci-dessous et cliquez <strong>Confirmer</strong></div></div>
+      </div>
+
+      <div class="pw-divider">Remplissez après le paiement</div>
+
+      <!-- FORM -->
+      <div id="pay-form">
+        <div class="pf-group"><label>Nom complet</label><input type="text" id="pf-nom" placeholder="Ex : Jean Rakoto"/></div>
+        <div class="pf-group"><label>Numéro de téléphone</label><input type="tel" id="pf-tel" placeholder="+261 34 XX XXX XX"/></div>
+        <div class="pf-group"><label>Email (optionnel)</label><input type="email" id="pf-email" placeholder="votre@email.com"/></div>
+        <div class="pf-group"><label>Code de transaction MVola</label><input type="text" id="pf-code" placeholder="Ex : ABC123456"/></div>
+        <button class="btn-pay" id="pay-btn" onclick="confirmPayment()">
+          <i class="ti ti-shield-check" style="font-size:18px"></i> Confirmer mon paiement
+        </button>
+        <div class="pw-footer">🔒 Sécurisé · Accès immédiat après vérification<br/><strong>Support :</strong> MVola 034 42 523 24</div>
+      </div>
+
+      <!-- PENDING -->
+      <div id="pay-pending">
+        <div class="pending-spinner"></div>
+        <div style="font-size:16px;font-weight:700;color:#18160F;margin-bottom:8px">Vérification en cours…</div>
+        <div style="font-size:13px;color:#5A5650">Nous vérifions votre transaction MVola.<br/>Cela prend quelques secondes.</div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="pay-success">
+        <div class="success-circle"><i class="ti ti-check" style="font-size:32px;color:#0D7A4E"></i></div>
+        <div style="font-size:18px;font-weight:800;color:#18160F;margin-bottom:8px">Paiement confirmé !</div>
+        <div style="font-size:14px;color:#5A5650;line-height:1.7;margin-bottom:1.5rem">Bienvenue sur <strong>Job Rapide</strong> !<br/>Votre accès est activé. L'application s'ouvre…</div>
+        <div style="background:#E8F5F0;border-radius:12px;padding:14px;font-size:13px;color:#0D7A4E;font-weight:600;display:flex;align-items:center;gap:8px;justify-content:center">
+          <i class="ti ti-check-circle" style="font-size:18px"></i> Transaction MVola validée
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- ══ END PAYWALL ══ -->
+
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span><div class="live-dot"></div> Surveillance temps réel active</span>
+    <span><i class="ti ti-refresh" style="font-size:12px"></i> Dernière mise à jour : il y a <span id="last-upd">32</span>s</span>
+  </div>
+  <span id="topbar-new" style="font-weight:700;cursor:pointer" onclick="showNotif()">+3 nouvelles offres ce matin</span>
+</div>
+
+<nav>
+  <a class="brand" href="#">
+    <div class="brand-icon"><i class="ti ti-map-pin" style="font-size:20px"></i></div>
+    <span class="brand-name">Job<span> Rapide</span></span>
+  </a>
+  <div class="nav-center">
+    <button class="nav-link active" onclick="setNav(this,'offres')"><i class="ti ti-briefcase" style="font-size:15px"></i> Offres</button>
+    <button class="nav-link" onclick="setNav(this,'alertes')"><i class="ti ti-bell" style="font-size:15px"></i> Mes alertes</button>
+    <button class="nav-link" onclick="setNav(this,'sources')"><i class="ti ti-rss" style="font-size:15px"></i> Sources</button>
+    <button class="nav-link" onclick="setNav(this,'stats')"><i class="ti ti-chart-bar" style="font-size:15px"></i> Stats</button>
+  </div>
+  <div class="nav-right">
+    <button class="notif-bell" onclick="toggleNotifPanel()" id="notif-bell-btn">
+      <i class="ti ti-bell" style="font-size:18px"></i>
+      <span class="badge" id="notif-count">5</span>
+    </button>
+    <button class="btn btn-outline" onclick="openLoginModal()"><i class="ti ti-user" style="font-size:15px"></i> Connexion</button>
+    <button class="btn btn-primary" onclick="openRegModal()"><i class="ti ti-sparkles" style="font-size:15px"></i> Créer une alerte</button>
+  </div>
+</nav>
+
+<!-- NOTIF PANEL -->
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-head">
+    <span>Notifications <span style="color:var(--red)">(5)</span></span>
+    <button class="notif-clear" onclick="clearNotifs()">Tout effacer</button>
+  </div>
+  <div id="notif-list"></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-text">
+        <h1>Toutes les offres d'emploi<br/><em>Madagascar</em> — <em>Job Rapide</em></h1>
+        <p>Agrégateur temps réel connecté à Facebook, LinkedIn, BestJobMada, Emploi.mg, Telegram, WhatsApp et 10 autres sources. Alertes instantanées sur tous vos canaux.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-val" id="s-total">1 358</span><div class="hstat-lbl">Offres totales</div></div>
+        <div class="hstat"><span class="hstat-val" id="s-today" style="color:var(--red)">24</span><div class="hstat-lbl green">Aujourd'hui</div></div>
+        <div class="hstat"><span class="hstat-val">14</span><div class="hstat-lbl">Sources actives</div></div>
+        <div class="hstat"><span class="hstat-val">8 540</span><div class="hstat-lbl">Abonnés alertes</div></div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <i class="ti ti-search" style="font-size:18px;color:var(--text3);flex-shrink:0"></i>
+      <input type="text" id="q" placeholder="Poste, compétence, entreprise…" onkeydown="if(event.key==='Enter')doSearch()"/>
+      <select id="qreg">
+        <option value="">Toute Madagascar</option>
+        <option>Antananarivo</option><option>Toamasina</option><option>Mahajanga</option>
+        <option>Fianarantsoa</option><option>Toliara</option><option>Antsiranana</option>
+        <option>Ambositra</option><option>Morondava</option>
+      </select>
+      <select id="qsec">
+        <option value="">Tous secteurs</option>
+        <option>IT / Tech</option><option>Finance / Compta</option><option>BTP / Génie civil</option>
+        <option>Santé / Médical</option><option>Éducation</option><option>Commerce / Vente</option>
+        <option>Agriculture</option><option>Logistique</option><option>Hôtellerie</option><option>ONG</option>
+      </select>
+      <button class="btn-search" onclick="doSearch()"><i class="ti ti-search" style="font-size:15px"></i> Rechercher</button>
+    </div>
+    <div class="src-src-bar-wrap">
+      <div class="sources-bar" id="src-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+  <!-- JOBS COLUMN -->
+  <div>
+    <div class="section-head">
+      <h2><i class="ti ti-list-details" style="font-size:17px;color:var(--red)"></i> Offres d'emploi <span class="count" id="jcount">24</span></h2>
+      <select style="border:1px solid var(--border);border-radius:var(--r);padding:7px 12px;font-size:13px;color:var(--text2);background:var(--surface);font-family:var(--font);outline:none" onchange="sortJobs(this.value)">
+        <option value="date">Plus récent</option>
+        <option value="sal">Salaire ↑</option>
+        <option value="src">Par source</option>
+      </select>
+    </div>
+    <div class="filter-row" id="frow"></div>
+    <div class="jobs-list" id="jlist"><div style="text-align:center;padding:3rem;color:var(--text3)"><i class="ti ti-loader" style="font-size:32px;animation:spin 1s linear infinite;display:block;margin:0 auto 12px"></i>Chargement…</div></div>
+    <button class="load-more" onclick="loadMore()"><i class="ti ti-dots" style="font-size:15px"></i> Afficher plus d'offres</button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- ALERT CREATOR -->
+    <div class="scard">
+      <h3 style="color:var(--red)"><i class="ti ti-bell-ringing" style="color:var(--red)"></i> Créer une alerte emploi</h3>
+      <div class="aform-group"><label>Mots-clés / métier</label><input type="text" id="ak" placeholder="Ex : développeur, comptable…"/></div>
+      <div class="aform-group"><label>Région</label>
+        <select id="ar"><option value="">Toute Madagascar</option><option>Antananarivo</option><option>Toamasina</option><option>Mahajanga</option><option>Fianarantsoa</option><option>Toliara</option><option>Antsiranana</option></select>
+      </div>
+      <div class="aform-group"><label>Secteur</label>
+        <select id="as"><option value="">Tous secteurs</option><option>IT / Tech</option><option>Finance / Compta</option><option>BTP / Génie civil</option><option>Santé / Médical</option><option>Éducation</option><option>Commerce / Vente</option><option>Agriculture</option><option>ONG</option></select>
+      </div>
+      <div class="aform-group"><label>Type de contrat</label>
+        <select id="ac"><option value="">Tous types</option><option>CDI</option><option>CDD</option><option>Stage</option><option>Freelance</option></select>
+      </div>
+      <div class="aform-group"><label>Sources à surveiller</label>
+        <select id="asrc"><option value="all">Toutes les sources (14)</option><option>Facebook groupes emploi</option><option>LinkedIn Madagascar</option><option>BestJobMada.com</option><option>Emploi.mg</option><option>MadaJob.com</option><option>Telegram emploi MG</option></select>
+      </div>
+      <div class="channels-heading">Canaux de notification</div>
+      <div class="ch-grid" id="ch-grid"></div>
+      <div class="aform-group"><label>Email ou numéro de téléphone</label><input type="text" id="acontact" placeholder="+261 34 XX XXX XX ou email@…"/></div>
+      <div class="aform-group"><label>Fréquence</label>
+        <select id="afreq"><option>Instantanée — dès qu'une offre paraît</option><option>Résumé quotidien (8h00)</option><option>Résumé hebdomadaire (lundi 8h)</option></select>
+      </div>
+      <button class="btn-sub" onclick="createAlert()"><i class="ti ti-bell-ringing" style="font-size:16px"></i> Activer l'alerte</button>
+    </div>
+
+    <!-- MY ALERTS -->
+    <div class="scard">
+      <h3><i class="ti ti-bell" style="color:var(--amber)"></i> Mes alertes actives <span style="font-size:12px;font-weight:700;background:var(--amber-bg);color:var(--amber);padding:2px 8px;border-radius:999px;margin-left:4px" id="alert-count-badge">2</span></h3>
+      <div id="my-alerts"></div>
+    </div>
+
+    <!-- SOURCE MONITOR -->
+    <div class="scard">
+      <h3><i class="ti ti-radar" style="color:var(--blue)"></i> Surveillance des sources</h3>
+      <div id="srcmon"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" id="modal-inner"></div>
+</div>
+
+<!-- TOASTS -->
+<div class="toast-wrap" id="toasts"></div>
+
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+<script>
+const SOURCES_DEF = [
+  {id:'fb',label:'Facebook',icon:'ti-brand-facebook',color:'#1877F2',cls:'fb',count:312,status:'ok',url:'https://facebook.com/groups/emploimadagascar'},
+  {id:'li',label:'LinkedIn',icon:'ti-brand-linkedin',color:'#0A66C2',cls:'li',count:198,status:'ok',url:'https://linkedin.com'},
+  {id:'bj',label:'BestJobMada',icon:'ti-star',color:'#C1272D',cls:'bj',count:224,status:'ok',url:'https://bestjobmada.com'},
+  {id:'em',label:'Emploi.mg',icon:'ti-briefcase',color:'#0D7A4E',cls:'em',count:187,status:'ok',url:'https://emploi.mg'},
+  {id:'mj',label:'MadaJob',icon:'ti-map-pin',color:'#5B3DB8',cls:'mj',count:143,status:'ok',url:'https://madajob.com'},
+  {id:'on',label:'ONEF',icon:'ti-building',color:'#E84393',cls:'on',count:42,status:'ok',url:'https://onef.mg'},
+  {id:'oi',label:'OIT / ILO',icon:'ti-world',color:'#B87333',cls:'oi',count:28,status:'ok',url:'https://ilo.org'},
+  {id:'te',label:'Telegram',icon:'ti-brand-telegram',color:'#229ED9',cls:'te',count:96,status:'ok',url:'https://t.me/emploimada'},
+  {id:'wh',label:'WhatsApp',icon:'ti-brand-whatsapp',color:'#25D366',cls:'wh',count:74,status:'slow',url:'#'},
+  {id:'in',label:'Instagram',icon:'ti-brand-instagram',color:'#E4405F',cls:'in',count:38,status:'ok',url:'https://instagram.com'},
+  {id:'tw',label:'Twitter/X',icon:'ti-brand-x',color:'#1DA1F2',cls:'tw',count:52,status:'ok',url:'https://x.com'},
+  {id:'go',label:'Google Jobs',icon:'ti-brand-google',color:'#4285F4',cls:'go',count:108,status:'ok',url:'https://jobs.google.com'},
+  {id:'ne',label:'Nexta.io',icon:'ti-bolt',color:'#F04E23',cls:'ne',count:61,status:'slow',url:'#'},
+  {id:'of',label:'Offreemploimg',icon:'ti-file-text',color:'#2496BE',cls:'of',count:33,status:'ok',url:'#'},
+];
+
+const JOBS = [
+  {id:1,title:'Développeur Full Stack React / Node.js',company:'Orange Madagascar',logo:'OM',color:'#FF6200',loc:'Antananarivo',ctr:'CDI',sal:'2 500 000 – 3 200 000 Ar',sec:'IT / Tech',src:'LinkedIn',srcIcon:'ti-brand-linkedin',srcColor:'#0A66C2',ago:'Il y a 1h',desc:'Rejoignez notre équipe Digital pour concevoir des apps web et mobiles à fort impact. Maîtrise React, Node.js, PostgreSQL requise.',isNew:true,url:'https://linkedin.com'},
+  {id:2,title:'Comptable Senior – Secteur bancaire',company:'BNI Madagascar',logo:'BN',color:'#003082',loc:'Antananarivo',ctr:'CDI',sal:'1 800 000 Ar',sec:'Finance / Compta',src:'BestJobMada',srcIcon:'ti-star',srcColor:'#C1272D',ago:'Il y a 3h',desc:'Gestion comptabilité générale, états financiers consolidés, supervision d\'une équipe de 3 collaborateurs.',isNew:true,url:'#'},
+  {id:3,title:'Ingénieur Génie Civil – Infrastructures',company:'COLAS Madagascar',logo:'CL',color:'#E31E24',loc:'Toamasina',ctr:'CDD 12 mois',sal:'3 000 000 Ar',sec:'BTP / Génie civil',src:'Emploi.mg',srcIcon:'ti-briefcase',srcColor:'#0D7A4E',ago:'Il y a 5h',desc:'Supervision des travaux routiers dans la région de Toamasina. 3 ans d\'expérience minimum.',isNew:false,url:'#'},
+  {id:4,title:'Responsable Marketing Digital',company:'Airtel Madagascar',logo:'AI',color:'#E40000',loc:'Antananarivo',ctr:'CDI',sal:'2 200 000 Ar',sec:'Commerce / Vente',src:'Facebook',srcIcon:'ti-brand-facebook',srcColor:'#1877F2',ago:'Il y a 7h',desc:'Pilotage stratégie digitale, gestion réseaux sociaux, campagnes SEA/SEO, analyse KPIs.',isNew:false,url:'#'},
+  {id:5,title:'Médecin Généraliste',company:'Clinique des Sœurs',logo:'CS',color:'#0D7A4E',loc:'Antananarivo',ctr:'CDI',sal:'Non précisé',sec:'Santé / Médical',src:'MadaJob',srcIcon:'ti-map-pin',srcColor:'#5B3DB8',ago:'Il y a 9h',desc:'Consultations, participation aux gardes, coordination avec les spécialistes. Inscription à l\'Ordre requise.',isNew:false,url:'#'},
+  {id:6,title:'Agronome / Conseiller terrain',company:'USAID Madagascar',logo:'US',color:'#002868',loc:'Fianarantsoa',ctr:'CDD 24 mois',sal:'1 500 000 – 2 000 000 Ar',sec:'Agriculture',src:'OIT / ILO',srcIcon:'ti-world',srcColor:'#B87333',ago:'Il y a 12h',desc:'Appui aux agriculteurs familiaux en Haute Matsiatra. Maîtrise du malgache obligatoire.',isNew:false,url:'#'},
+  {id:7,title:'Développeur Mobile Flutter',company:'Mvola (Telma)',logo:'TL',color:'#00AEEF',loc:'Antananarivo',ctr:'CDI',sal:'2 800 000 Ar',sec:'IT / Tech',src:'Telegram',srcIcon:'ti-brand-telegram',srcColor:'#229ED9',ago:'Il y a 13h',desc:'Développement de l\'app mobile Mvola Flutter/Dart, intégration API REST, CI/CD GitLab.',isNew:false,url:'#'},
+  {id:8,title:'Chef de Projet Logistique',company:'Bolloré Transport',logo:'BT',color:'#2D4A8A',loc:'Toamasina',ctr:'CDI',sal:'3 500 000 Ar',sec:'Logistique',src:'LinkedIn',srcIcon:'ti-brand-linkedin',srcColor:'#0A66C2',ago:'Il y a 1j',desc:'Coordination des opérations portuaires, gestion d\'équipe de 15 personnes, suivi KPIs logistiques.',isNew:false,url:'#'},
+  {id:9,title:'Stage — Assistant(e) RH',company:'Jirama',logo:'JI',color:'#0055A4',loc:'Antananarivo',ctr:'Stage',sal:'400 000 Ar',sec:'Finance / Compta',src:'ONEF',srcIcon:'ti-building',srcColor:'#E84393',ago:'Il y a 1j',desc:'Stage 6 mois : recrutement, gestion administrative du personnel, aide à la formation.',isNew:false,url:'#'},
+  {id:10,title:'Enseignant(e) Mathématiques',company:'Groupe Notre-Dame',logo:'ND',color:'#8B1A1A',loc:'Mahajanga',ctr:'CDI',sal:'700 000 Ar',sec:'Éducation',src:'Facebook',srcIcon:'ti-brand-facebook',srcColor:'#1877F2',ago:'Il y a 2j',desc:'Cours de maths en Terminale, préparation bac malgache. CAPES ou équivalent exigé.',isNew:false,url:'#'},
+  {id:11,title:'Community Manager Senior',company:'Digital Boost Mada',logo:'DB',color:'#7C3AED',loc:'Antananarivo',ctr:'CDI',sal:'1 200 000 Ar',sec:'Commerce / Vente',src:'Instagram',srcIcon:'ti-brand-instagram',srcColor:'#E4405F',ago:'Il y a 2j',desc:'Gestion des comptes FB/IG/TikTok de 5 marques locales. Portfolio créatif requis.',isNew:false,url:'#'},
+  {id:12,title:'Infirmier(e) urgences',company:'CHU d\'Antananarivo',logo:'CH',color:'#059669',loc:'Antananarivo',ctr:'CDI',sal:'850 000 Ar',sec:'Santé / Médical',src:'WhatsApp',srcIcon:'ti-brand-whatsapp',srcColor:'#25D366',ago:'Il y a 3j',desc:'Service des urgences, soins infirmiers, triage, collaboration avec l\'équipe médicale.',isNew:false,url:'#'},
+];
+
+const NOTIFS = [
+  {ico:'ti-brand-linkedin',bg:'#EBF3FC',color:'#0A66C2',title:'Nouveau : Développeur React – Antananarivo',sub:'LinkedIn · Orange Madagascar',time:'il y a 5 min'},
+  {ico:'ti-brand-facebook',bg:'#EEF4FF',color:'#1877F2',title:'2 offres Comptable publiées',sub:'Facebook Groupe Emploi Madagascar',time:'il y a 22 min'},
+  {ico:'ti-star',bg:'#FDF1F1',color:'#C1272D',title:'Chef de projet IT – BNI Madagascar',sub:'BestJobMada.com · CDI',time:'il y a 1h'},
+  {ico:'ti-brand-telegram',bg:'#E8F5FD',color:'#229ED9',title:'Alerte : 4 nouvelles offres IT',sub:'Telegram @emploimada',time:'il y a 2h'},
+  {ico:'ti-brand-whatsapp',bg:'#E8F8EE',color:'#128C4A',title:'Stage RH disponible – Jirama',sub:'WhatsApp Groupe Emploi',time:'il y a 3h'},
+];
+
+const MYALERTS_DEFAULT = [
+  {kw:'Développeur IT',region:'Antananarivo',ch:['email','telegram'],active:true},
+  {kw:'Comptable',region:'Toute Madagascar',ch:['sms','whatsapp'],active:true},
+];
+
+const CHANNELS = [
+  {id:'email',label:'Email',icon:'ti-mail'},
+  {id:'sms',label:'SMS',icon:'ti-message'},
+  {id:'whatsapp',label:'WhatsApp',icon:'ti-brand-whatsapp'},
+  {id:'telegram',label:'Telegram',icon:'ti-brand-telegram'},
+  {id:'push',label:'Push app',icon:'ti-bell'},
+  {id:'messenger',label:'Messenger',icon:'ti-brand-facebook'},
+];
+
+const SECTORS_F = ['Tous','IT / Tech','Finance / Compta','BTP / Génie civil','Santé / Médical','Commerce / Vente','Agriculture','Logistique','Éducation'];
+
+let activeSrcs = new Set(SOURCES_DEF.map(s=>s.id));
+let activeSector = 'Tous';
+let savedJobs = new Set();
+let myAlerts = [...MYALERTS_DEFAULT];
+let activeChannels = {email:true,sms:false,whatsapp:false,telegram:false,push:false,messenger:false};
+let shownCount = 8;
+let currentJobs = [...JOBS];
+
+// SOURCES BAR
+function renderSrcBar(){
+  const bar = document.getElementById('src-bar');
+  bar.innerHTML = SOURCES_DEF.map(s=>`
+    <div class="src-pill on ${s.cls}" id="sp-${s.id}" onclick="toggleSrc('${s.id}')">
+      <i class="ti ${s.icon}"></i>${s.label}
+      <span style="opacity:.75;font-size:10px">${s.count}</span>
+    </div>
+  `).join('');
+}
+
+function toggleSrc(id){
+  if(activeSrcs.has(id)){activeSrcs.delete(id);document.getElementById('sp-'+id).classList.remove('on');}
+  else{activeSrcs.add(id);document.getElementById('sp-'+id).classList.add('on');}
+  filterJobs();
+}
+
+// FILTERS
+function renderFilters(){
+  document.getElementById('frow').innerHTML = SECTORS_F.map(s=>`
+    <div class="fchip ${activeSector===s?'active':''}" onclick="setSector('${s}')">${s}</div>
+  `).join('');
+}
+function setSector(s){activeSector=s;renderFilters();filterJobs();}
+
+function filterJobs(){
+  const q = document.getElementById('q').value.toLowerCase().trim();
+  const reg = document.getElementById('qreg').value;
+  currentJobs = JOBS.filter(j=>{
+    const srcOk = activeSrcs.size===0 || SOURCES_DEF.some(s=>activeSrcs.has(s.id)&&j.src.toLowerCase().includes(s.label.toLowerCase().split(' ')[0].toLowerCase()));
+    const secOk = activeSector==='Tous'||j.sec===activeSector;
+    const qOk = !q||j.title.toLowerCase().includes(q)||j.company.toLowerCase().includes(q)||j.sec.toLowerCase().includes(q);
+    const rOk = !reg||j.loc===reg;
+    return srcOk&&secOk&&qOk&&rOk;
+  });
+  shownCount = 8;
+  renderJobs();
+}
+function doSearch(){filterJobs();}
+
+function renderJobs(){
+  const el=document.getElementById('jlist');
+  const shown=currentJobs.slice(0,shownCount);
+  document.getElementById('jcount').textContent=currentJobs.length;
+  if(!shown.length){el.innerHTML='<div style="text-align:center;padding:3rem;color:var(--text3)"><i class="ti ti-mood-empty" style="font-size:32px;display:block;margin:0 auto 12px"></i>Aucune offre pour ces critères.</div>';return;}
+  el.innerHTML=shown.map(j=>`
+    <div class="jcard ${j.isNew?'isnew':''}" onclick="openJobModal(${j.id})">
+      <div class="jcard-top">
+        <div class="jlogo" style="background:${j.color}">${j.logo}</div>
+        <div class="jinfo">
+          <div class="jtitle">${j.title}</div>
+          <div class="jcompany">${j.company}</div>
+        </div>
+        ${j.isNew?'<span class="tag tag-new"><i class="ti ti-sparkles" style="font-size:11px"></i>Nouveau</span>':''}
+      </div>
+      <div class="jcard-meta">
+        <span class="tag tag-loc"><i class="ti ti-map-pin" style="font-size:11px"></i>${j.loc}</span>
+        <span class="tag tag-ctr"><i class="ti ti-briefcase" style="font-size:11px"></i>${j.ctr}</span>
+        ${j.sal!=='Non précisé'?`<span class="tag tag-sal"><i class="ti ti-coin" style="font-size:11px"></i>${j.sal}</span>`:''}
+        <span class="tag tag-src" style="background:${j.srcColor}18;color:${j.srcColor}"><i class="ti ${j.srcIcon}" style="font-size:11px"></i>${j.src}</span>
+      </div>
+      <div class="jdesc">${j.desc}</div>
+      <div class="jcard-foot">
+        <span class="jtime"><i class="ti ti-clock" style="font-size:12px"></i>${j.ago}</span>
+        <div class="jactions" onclick="event.stopPropagation()">
+          <button class="jbtn saved-btn ${savedJobs.has(j.id)?'on':''}" onclick="toggleSave(${j.id})">
+            <i class="ti ti-heart" style="font-size:13px"></i>${savedJobs.has(j.id)?'Sauvegardé':'Sauvegarder'}
+          </button>
+          <button class="jbtn apply" onclick="openApplyModal(${j.id})">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function loadMore(){shownCount+=4;renderJobs();}
+function toggleSave(id){savedJobs.has(id)?savedJobs.delete(id):savedJobs.add(id);toast(savedJobs.has(id)?'Offre sauvegardée !':'Offre retirée',savedJobs.has(id)?'success':'');renderJobs();}
+function sortJobs(v){if(v==='sal')currentJobs=[...currentJobs].sort((a,b)=>b.sal!=='Non précisé'?1:-1);else if(v==='src')currentJobs=[...currentJobs].sort((a,b)=>a.src.localeCompare(b.src));else currentJobs=[...JOBS];renderJobs();}
+
+// JOB MODAL
+function openJobModal(id){
+  const j=JOBS.find(x=>x.id===id);
+  openModal(`
+    <div class="modal-header">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="jlogo" style="background:${j.color};width:48px;height:48px;font-size:16px;border-radius:12px">${j.logo}</div>
+          <div>
+            <h2 style="font-size:19px">${j.title}</h2>
+            <div style="font-size:13px;color:var(--text2)">${j.company}</div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="jcard-meta" style="margin-bottom:1rem">
+      <span class="tag tag-loc"><i class="ti ti-map-pin" style="font-size:11px"></i>${j.loc}</span>
+      <span class="tag tag-ctr"><i class="ti ti-briefcase" style="font-size:11px"></i>${j.ctr}</span>
+      ${j.sal!=='Non précisé'?`<span class="tag tag-sal"><i class="ti ti-coin" style="font-size:11px"></i>${j.sal}</span>`:''}
+      <span class="tag tag-src" style="background:${j.srcColor}18;color:${j.srcColor}"><i class="ti ${j.srcIcon}" style="font-size:11px"></i>${j.src}</span>
+    </div>
+    <div class="jd-section"><h4>Description du poste</h4><p>${j.desc} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p></div>
+    <div class="jd-section"><h4>Postuler via</h4>
+      <div class="apply-ch-grid">
+        <button class="apply-ch-btn" onclick="applyVia('${j.url}','Email')"><i class="ti ti-mail" style="color:var(--red)"></i>Email direct</button>
+        <button class="apply-ch-btn" onclick="applyVia('${j.url}','Site')"><i class="ti ti-external-link" style="color:var(--blue)"></i>Site source</button>
+        <button class="apply-ch-btn" onclick="applyVia('#','WhatsApp')"><i class="ti ti-brand-whatsapp" style="color:#128C4A"></i>WhatsApp</button>
+        <button class="apply-ch-btn" onclick="applyVia('#','LinkedIn')"><i class="ti ti-brand-linkedin" style="color:#0A66C2"></i>LinkedIn</button>
+      </div>
+    </div>
+  `);
+}
+function openApplyModal(id){openJobModal(id);}
+function applyVia(url,via){if(url!=='#')window.open(url,'_blank');toast('Redirection vers '+via+'…','info');closeModal();}
+
+// CHANNELS
+function renderChannels(){
+  document.getElementById('ch-grid').innerHTML=CHANNELS.map(c=>`
+    <div class="chbtn ${c.id} ${activeChannels[c.id]?'on':''}" onclick="toggleCh('${c.id}')">
+      <i class="ti ${c.icon}"></i><span>${c.label}</span>
+    </div>
+  `).join('');
+}
+function toggleCh(id){activeChannels[id]=!activeChannels[id];renderChannels();}
+
+// CREATE ALERT
+function createAlert(){
+  const kw=document.getElementById('ak').value.trim();
+  const reg=document.getElementById('ar').value;
+  const contact=document.getElementById('acontact').value.trim();
+  const chs=Object.entries(activeChannels).filter(([,v])=>v).map(([k])=>k);
+  if(!contact){toast('Entrez votre email ou numéro','warn');return;}
+  if(!chs.length){toast('Sélectionnez au moins un canal','warn');return;}
+  const label=kw||(document.getElementById('as').value)||'Toutes offres';
+  myAlerts.unshift({kw:label,region:reg||'Toute Madagascar',ch:chs,active:true});
+  renderMyAlerts();
+  document.getElementById('alert-count-badge').textContent=myAlerts.length;
+  openModal(`
+    <div class="modal-header"><h2>Alerte activée !</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+    <div style="text-align:center;padding:1rem 0">
+      <div style="width:64px;height:64px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem">
+        <i class="ti ti-check" style="font-size:32px;color:var(--green)"></i>
+      </div>
+      <p style="font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:1.25rem">
+        Vous recevrez les offres <strong>"${label}"</strong> via <strong>${chs.join(', ')}</strong><br/>sur <strong>${contact}</strong>.
+      </p>
+      <div style="background:var(--surface2);border-radius:var(--r);padding:14px;text-align:left;font-size:13px;color:var(--text2);margin-bottom:1.25rem">
+        <div style="margin-bottom:6px"><i class="ti ti-clock" style="vertical-align:-2px;margin-right:6px;color:var(--red)"></i>Surveillance toutes les <strong>5 minutes</strong> sur 14 sources</div>
+        <div style="margin-bottom:6px"><i class="ti ti-database" style="vertical-align:-2px;margin-right:6px;color:var(--blue)"></i>Facebook · LinkedIn · BestJobMada · Emploi.mg · Telegram · WhatsApp + 8 autres</div>
+        <div><i class="ti ti-settings" style="vertical-align:-2px;margin-right:6px;color:var(--text3)"></i>Modifiable à tout moment depuis "Mes alertes"</div>
+      </div>
+      <button class="btn-primary" onclick="closeModal()" style="width:100%;justify-content:center"><i class="ti ti-check"></i> Compris, merci !</button>
+    </div>
+  `);
+}
+
+// MY ALERTS
+function renderMyAlerts(){
+  const el=document.getElementById('my-alerts');
+  if(!myAlerts.length){el.innerHTML='<div style="font-size:13px;color:var(--text3);padding:12px 0">Aucune alerte configurée.</div>';return;}
+  el.innerHTML=myAlerts.map((a,i)=>`
+    <div class="alert-item">
+      <div class="alert-dot" style="background:${a.active?'var(--green)':'var(--text3)'}"></div>
+      <div class="alert-item-info">
+        <div class="alert-item-title">${a.kw}</div>
+        <div class="alert-item-ch">${a.region} · ${a.ch.join(', ')}</div>
+      </div>
+      <button class="alert-del" onclick="delAlert(${i})" title="Supprimer"><i class="ti ti-trash" style="font-size:14px"></i></button>
+    </div>
+  `).join('');
+}
+function delAlert(i){myAlerts.splice(i,1);renderMyAlerts();document.getElementById('alert-count-badge').textContent=myAlerts.length;toast('Alerte supprimée');}
+
+// SOURCE MONITOR
+function renderSrcMon(){
+  document.getElementById('srcmon').innerHTML=SOURCES_DEF.slice(0,8).map(s=>`
+    <div class="srcmon-item">
+      <div class="srcmon-icon" style="background:${s.color}18"><i class="ti ${s.icon}" style="color:${s.color};font-size:15px"></i></div>
+      <span class="srcmon-name">${s.label}</span>
+      <span class="srcmon-count">${s.count}</span>
+      <div class="srcmon-status ${s.status}"></div>
+    </div>
+  `).join('');
+}
+
+// NOTIF PANEL
+function renderNotifPanel(){
+  document.getElementById('notif-list').innerHTML=NOTIFS.map(n=>`
+    <div class="notif-item">
+      <div class="notif-ico" style="background:${n.bg}"><i class="ti ${n.ico}" style="color:${n.color}"></i></div>
+      <div class="notif-txt"><strong>${n.title}</strong><span>${n.sub}</span><div class="notif-time">${n.time}</div></div>
+      <div class="notif-unread"></div>
+    </div>
+  `).join('');
+}
+function toggleNotifPanel(){const p=document.getElementById('notif-panel');p.classList.toggle('open');}
+function clearNotifs(){document.getElementById('notif-list').innerHTML='<div style="padding:1.5rem;text-align:center;font-size:13px;color:var(--text3)">Aucune notification.</div>';document.getElementById('notif-count').textContent='0';document.getElementById('notif-panel').classList.remove('open');toast('Notifications effacées');}
+document.addEventListener('click',e=>{if(!e.target.closest('#notif-panel')&&!e.target.closest('#notif-bell-btn'))document.getElementById('notif-panel').classList.remove('open');});
+
+// MODAL helpers
+function openModal(html){const bg=document.getElementById('modal-bg');document.getElementById('modal-inner').innerHTML=html;bg.classList.add('open');}
+function closeModal(){document.getElementById('modal-bg').classList.remove('open');}
+document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+function openLoginModal(){openModal(`
+  <div class="modal-header"><h2>Connexion</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:1.25rem;line-height:1.6">Accédez à vos alertes, offres sauvegardées et tableau de bord personnel.</p>
+  <div class="aform-group"><label>Email</label><input type="email" placeholder="votre@email.com"/></div>
+  <div class="aform-group"><label>Mot de passe</label><input type="password" placeholder="••••••••"/></div>
+  <button class="btn-sub" onclick="closeModal();toast('Connexion réussie !','success')"><i class="ti ti-login"></i> Se connecter</button>
+  <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--text3)">Pas encore de compte ? <span style="color:var(--red);cursor:pointer;font-weight:600" onclick="openRegModal()">S'inscrire</span></p>
+`);}
+function openRegModal(){openModal(`
+  <div class="modal-header"><h2>Créer un compte</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:1.25rem;line-height:1.6">Gérez toutes vos alertes et candidatures depuis un seul tableau de bord.</p>
+  <div class="aform-group"><label>Nom complet</label><input type="text" placeholder="Jean Rakoto"/></div>
+  <div class="aform-group"><label>Email</label><input type="email" placeholder="votre@email.com"/></div>
+  <div class="aform-group"><label>Téléphone (WhatsApp / SMS)</label><input type="tel" placeholder="+261 34 XX XXX XX"/></div>
+  <div class="aform-group"><label>Mot de passe</label><input type="password" placeholder="••••••••"/></div>
+  <button class="btn-sub" onclick="closeModal();toast('Compte créé ! Bienvenue sur MadaJobs','success')"><i class="ti ti-user-plus"></i> Créer mon compte</button>
+`);}
+function setNav(el,v){document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));el.classList.add('active');}
+
+// TOAST
+function toast(msg,type=''){
+  const c=document.getElementById('toasts'),el=document.createElement('div');
+  el.className='toast '+(type||'');
+  const icons={success:'ti-check',info:'ti-info-circle',warn:'ti-alert-circle','':'ti-bell'};
+  el.innerHTML=`<i class="ti ${icons[type]||'ti-bell'}" style="font-size:15px;flex-shrink:0"></i>${msg}`;
+  c.appendChild(el);
+  setTimeout(()=>{el.style.animation='tout .3s ease forwards';setTimeout(()=>el.remove(),300);},3500);
+}
+
+// LIVE COUNTER
+let upd=32;
+setInterval(()=>{upd=Math.max(0,upd-1);document.getElementById('last-upd').textContent=upd;if(upd===0){upd=60;const t=parseInt(document.getElementById('s-today').textContent);document.getElementById('s-today').textContent=t+1;const total=parseInt(document.getElementById('s-total').textContent.replace(/\s/g,''));document.getElementById('s-total').textContent=(total+1).toLocaleString('fr-FR');}},1000);
+
+// NEW JOB NOTIFICATION SIMULATION
+const newJobAlerts=[
+  {msg:'Nouvelle offre : Data Analyst – Antananarivo (LinkedIn)',type:'success'},
+  {msg:'2 offres BTP publiées sur Emploi.mg',type:'info'},
+  {msg:'Alerte : Stage Marketing – Mahajanga (Facebook)',type:'success'},
+];
+let alertIdx=0;
+setInterval(()=>{toast(newJobAlerts[alertIdx%newJobAlerts.length].msg,newJobAlerts[alertIdx%newJobAlerts.length].type);alertIdx++;},18000);
+
+// INIT
+renderSrcBar();
+renderFilters();
+renderChannels();
+renderMyAlerts();
+renderSrcMon();
+renderNotifPanel();
+setTimeout(()=>renderJobs(),600);
+
+// ── PAYWALL ──
+function copyNum(){navigator.clipboard.writeText('0344252324').then(()=>toast('Numéro MVola copié !','success')).catch(()=>{});const btn=document.querySelector('.copy-btn');btn.innerHTML='<i class="ti ti-check" style="font-size:13px"></i>Copié !';setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" style="font-size:13px"></i>Copier';},2000);}
+
+function confirmPayment(){
+  const nom=document.getElementById('pf-nom').value.trim();
+  const tel=document.getElementById('pf-tel').value.trim();
+  const code=document.getElementById('pf-code').value.trim();
+
+  // ACCÈS ADMIN SECRET
+  if(code==='Lovanirina1992'){
+    document.getElementById('pay-form').style.display='none';
+    document.getElementById('pay-success').style.display='block';
+    setTimeout(()=>{
+      const pw=document.getElementById('paywall');
+      pw.style.transition='opacity .8s ease';
+      pw.style.opacity='0';
+      setTimeout(()=>{pw.style.display='none';},800);
+      toast('Bienvenue Patron ! Accès admin activé.','success');
+    },1200);
+    return;
+  }
+
+  // PAIEMENT NORMAL
+  if(!nom){alert('Veuillez entrer votre nom complet.');return;}
+  if(!tel){alert('Veuillez entrer votre numéro de téléphone.');return;}
+  if(!code){alert('Veuillez entrer le code de transaction MVola.');return;}
+  document.getElementById('pay-form').style.display='none';
+  document.getElementById('pay-pending').style.display='block';
+  setTimeout(()=>{
+    document.getElementById('pay-pending').style.display='none';
+    document.getElementById('pay-success').style.display='block';
+    setTimeout(()=>{
+      const pw=document.getElementById('paywall');
+      pw.style.transition='opacity .8s ease';
+      pw.style.opacity='0';
+      setTimeout(()=>{pw.style.display='none';},800);
+      toast('Bienvenue '+nom+' ! Accès activé.','success');
+    },2200);
+  },3500);
+}
+
+</script>
+</body>
+</html>
