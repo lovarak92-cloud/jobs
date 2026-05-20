@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -632,7 +633,7 @@ function renderJobs(){
           <button class="jbtn saved-btn ${savedJobs.has(j.id)?'on':''}" onclick="toggleSave(${j.id})">
             <i class="ti ti-heart" style="font-size:13px"></i>${savedJobs.has(j.id)?'Sauvegardé':'Sauvegarder'}
           </button>
-          <button class="jbtn apply" onclick="openApplyModal(${j.id})">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
+          <button class="jbtn apply" onclick="event.stopPropagation();window.open('${j.url}','_blank')">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
         </div>
       </div>
     </div>
@@ -677,7 +678,7 @@ function openJobModal(id){
   `);
 }
 function openApplyModal(id){openJobModal(id);}
-function applyVia(url,via){if(url!=='#')window.open(url,'_blank');toast('Redirection vers '+via+'…','info');closeModal();}
+function applyVia(url,via){window.open(url,'_blank');toast('Ouverture de '+via+'…','info');closeModal();}
 
 // CHANNELS
 function renderChannels(){
