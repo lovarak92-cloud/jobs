@@ -633,7 +633,7 @@ function renderJobs(){
           <button class="jbtn saved-btn ${savedJobs.has(j.id)?'on':''}" onclick="toggleSave(${j.id})">
             <i class="ti ti-heart" style="font-size:13px"></i>${savedJobs.has(j.id)?'Sauvegardé':'Sauvegarder'}
           </button>
-          <button class="jbtn apply" onclick="event.stopPropagation();window.open('${j.url}','_blank')">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
+          <button class="jbtn apply" onclick="event.stopPropagation();openRedirect('${j.url}','${j.src}','${j.title}')">Postuler <i class="ti ti-arrow-right" style="font-size:12px"></i></button>
         </div>
       </div>
     </div>
@@ -810,6 +810,15 @@ const newJobAlerts=[
 let alertIdx=0;
 setInterval(()=>{toast(newJobAlerts[alertIdx%newJobAlerts.length].msg,newJobAlerts[alertIdx%newJobAlerts.length].type);alertIdx++;},18000);
 
+// CHECK ACCESS
+(function(){
+  var access = localStorage.getItem('jobrapide_access');
+  if(access === 'granted'){
+    var pw = document.getElementById('paywall');
+    if(pw) pw.style.display = 'none';
+  }
+})();
+
 // INIT
 renderSrcBar();
 renderFilters();
@@ -819,47 +828,79 @@ renderSrcMon();
 renderNotifPanel();
 setTimeout(()=>renderJobs(),600);
 
+// ── REDIRECT ──
+let _redirectUrl='';
+let _redirectSrc='';
+
+function openRedirect(url, src, title){
+  _redirectUrl = url;
+  _redirectSrc = src;
+  document.getElementById('modal-inner').innerHTML = 
+    '<div style="padding:1rem">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">' +
+    '<h2 style="font-size:18px;font-weight:700">Postuler</h2>' +
+    '<button onclick="closeModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999">&times;</button>' +
+    '</div>' +
+    '<p style="font-size:14px;color:#666;margin-bottom:1rem">Offre sur <strong>' + src + '</strong> :</p>' +
+    '<p style="font-size:14px;font-weight:600;color:#333;background:#f5f5f5;padding:12px;border-radius:8px;margin-bottom:1.5rem">' + title + '</p>' +
+    '<button onclick="doRedirect()" style="width:100%;background:#C1272D;color:white;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px">Ouvrir ' + src + ' &rarr;</button>' +
+    '<button onclick="copyLink()" style="width:100%;background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:10px;padding:12px;font-size:14px;font-weight:600;cursor:pointer">Copier le lien</button>' +
+    '</div>';
+  document.getElementById('modal-bg').classList.add('open');
+}
+
+function doRedirect(){ 
+  window.open(_redirectUrl, '_blank'); 
+  closeModal(); 
+}
+
+function copyLink(){ 
+  navigator.clipboard.writeText(_redirectUrl); 
+  toast('Lien copié !', 'success'); 
+}
+
 // ── PAYWALL ──
 function copyNum(){navigator.clipboard.writeText('0344252324').then(()=>toast('Numéro MVola copié !','success')).catch(()=>{});const btn=document.querySelector('.copy-btn');btn.innerHTML='<i class="ti ti-check" style="font-size:13px"></i>Copié !';setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" style="font-size:13px"></i>Copier';},2000);}
 
-function confirmPayment(){
-  const nom=document.getElementById('pf-nom').value.trim();
-  const tel=document.getElementById('pf-tel').value.trim();
-  const code=document.getElementById('pf-code').value.trim();
+function unlockApp(nom){
+  localStorage.setItem('jobrapide_access','granted');
+  localStorage.setItem('jobrapide_nom', nom);
+  var pw=document.getElementById('paywall');
+  pw.style.transition='opacity 1s ease';
+  pw.style.opacity='0';
+  setTimeout(function(){pw.style.display='none';},1000);
+  toast('Bienvenue '+nom+' !','success');
+}
 
-  // ACCÈS ADMIN SECRET
+function confirmPayment(){
+  var nom=document.getElementById('pf-nom').value.trim();
+  var tel=document.getElementById('pf-tel').value.trim();
+  var code=document.getElementById('pf-code').value.trim();
+
+  // CODE ADMIN SECRET
   if(code==='Lovanirina1992'){
-    document.getElementById('pay-form').style.display='none';
-    document.getElementById('pay-success').style.display='block';
-    setTimeout(()=>{
-      const pw=document.getElementById('paywall');
-      pw.style.transition='opacity .8s ease';
-      pw.style.opacity='0';
-      setTimeout(()=>{pw.style.display='none';},800);
-      toast('Bienvenue Patron ! Accès admin activé.','success');
-    },1200);
+    unlockApp('Patron');
     return;
   }
 
   // PAIEMENT NORMAL
-  if(!nom){alert('Veuillez entrer votre nom complet.');return;}
-  if(!tel){alert('Veuillez entrer votre numéro de téléphone.');return;}
-  if(!code){alert('Veuillez entrer le code de transaction MVola.');return;}
+  if(nom===''){ alert('Veuillez entrer votre nom complet.'); return; }
+  if(tel===''){ alert('Veuillez entrer votre numéro de téléphone.'); return; }
+  if(code===''){ alert('Veuillez entrer le code de transaction MVola.'); return; }
+
   document.getElementById('pay-form').style.display='none';
   document.getElementById('pay-pending').style.display='block';
-  setTimeout(()=>{
+
+  setTimeout(function(){
     document.getElementById('pay-pending').style.display='none';
     document.getElementById('pay-success').style.display='block';
-    setTimeout(()=>{
-      const pw=document.getElementById('paywall');
-      pw.style.transition='opacity .8s ease';
-      pw.style.opacity='0';
-      setTimeout(()=>{pw.style.display='none';},800);
-      toast('Bienvenue '+nom+' ! Accès activé.','success');
-    },2200);
-  },3500);
+    setTimeout(function(){
+      unlockApp(nom);
+    },2000);
+  },3000);
 }
 
 </script>
 </body>
 </html>
+
