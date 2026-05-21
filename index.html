@@ -835,36 +835,25 @@ let _redirectUrl='';
 
 function openRedirect(url, src, title){
   _redirectUrl = url;
-  var j = JOBS.find(function(x){ return x.title===title || x.url===url; });
-  
-  var btns = '';
-  if(j && j.email){
-    btns += '<button onclick="window.location.href='mailto:'+j.email+''" style="width:100%;background:white;border:1.5px solid #C1272D;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;color:#C1272D;display:flex;align-items:center;gap:10px;font-family:sans-serif;margin-bottom:8px"><i class="ti ti-mail" style="font-size:18px"></i>'+j.email+'</button>';
+  var j = null;
+  for(var i=0;i<JOBS.length;i++){
+    if(JOBS[i].title===title||JOBS[i].url===url){j=JOBS[i];break;}
   }
-  if(j && j.phone){
-    btns += '<button onclick="window.location.href='tel:'+j.phone.replace(/ /g,'')+''" style="width:100%;background:white;border:1.5px solid #0D7A4E;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;color:#0D7A4E;display:flex;align-items:center;gap:10px;font-family:sans-serif;margin-bottom:8px"><i class="ti ti-phone" style="font-size:18px"></i>'+j.phone+'</button>';
+  var html2 = '<div style="padding:1rem">';
+  html2 += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">';
+  html2 += '<h2 style="font-size:18px;font-weight:700">Contacter le recruteur</h2>';
+  html2 += '<button onclick="closeModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999">&times;</button>';
+  html2 += '</div>';
+  html2 += '<div style="background:#f5f5f5;border-radius:10px;padding:12px;margin-bottom:1rem;font-size:13px;font-weight:600;color:#333">' + title + '</div>';
+  if(j){
+    if(j.email) html2 += '<a href="mailto:'+j.email+'" style="display:flex;align-items:center;gap:10px;width:100%;background:white;border:1.5px solid #C1272D;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;color:#C1272D;text-decoration:none;margin-bottom:8px"><i class="ti ti-mail" style="font-size:18px"></i>'+j.email+'</a>';
+    if(j.phone) html2 += '<a href="tel:'+j.phone+'" style="display:flex;align-items:center;gap:10px;width:100%;background:white;border:1.5px solid #0D7A4E;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;color:#0D7A4E;text-decoration:none;margin-bottom:8px"><i class="ti ti-phone" style="font-size:18px"></i>'+j.phone+'</a>';
+    if(j.facebook) html2 += '<a href="'+j.facebook+'" target="_blank" style="display:flex;align-items:center;gap:10px;width:100%;background:white;border:1.5px solid #1877F2;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;color:#1877F2;text-decoration:none;margin-bottom:8px"><i class="ti ti-brand-facebook" style="font-size:18px"></i>Voir sur Facebook</a>';
+    if(j.whatsapp) html2 += '<a href="'+j.whatsapp+'" target="_blank" style="display:flex;align-items:center;gap:10px;width:100%;background:white;border:1.5px solid #25D366;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;color:#128C4A;text-decoration:none;margin-bottom:8px"><i class="ti ti-brand-whatsapp" style="font-size:18px"></i>Contacter sur WhatsApp</a>';
   }
-  if(j && j.facebook){
-    btns += '<button onclick="window.open(''+j.facebook+'','_blank')" style="width:100%;background:white;border:1.5px solid #1877F2;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;color:#1877F2;display:flex;align-items:center;gap:10px;font-family:sans-serif;margin-bottom:8px"><i class="ti ti-brand-facebook" style="font-size:18px"></i>Voir sur Facebook</button>';
-  }
-  if(j && j.whatsapp){
-    btns += '<button onclick="window.open(''+j.whatsapp+'','_blank')" style="width:100%;background:white;border:1.5px solid #25D366;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;color:#128C4A;display:flex;align-items:center;gap:10px;font-family:sans-serif;margin-bottom:8px"><i class="ti ti-brand-whatsapp" style="font-size:18px"></i>Contacter sur WhatsApp</button>';
-  }
-  btns += '<button onclick="window.open(''+url+'','_blank')" style="width:100%;background:white;border:1.5px solid #1A5FA8;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;color:#1A5FA8;display:flex;align-items:center;gap:10px;font-family:sans-serif;margin-bottom:8px"><i class="ti ti-external-link" style="font-size:18px"></i>Voir l'offre sur '+src+'</button>';
-
-  document.getElementById('modal-inner').innerHTML =
-    '<div style="padding:1rem">' +
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">' +
-    '<h2 style="font-size:18px;font-weight:700">Contacter le recruteur</h2>' +
-    '<button onclick="closeModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999">&times;</button>' +
-    '</div>' +
-    '<div style="background:#f5f5f5;border-radius:10px;padding:12px;margin-bottom:1.25rem">' +
-    '<div style="font-size:13px;font-weight:700;color:#333">' + title + '</div>' +
-    '<div style="font-size:12px;color:#666;margin-top:3px">Source : ' + src + '</div>' +
-    '</div>' +
-    '<div style="font-size:12px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Choisir un moyen de contact</div>' +
-    btns +
-    '</div>';
+  html2 += '<a href="'+url+'" target="_blank" style="display:flex;align-items:center;gap:10px;width:100%;background:white;border:1.5px solid #1A5FA8;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;color:#1A5FA8;text-decoration:none;margin-bottom:8px"><i class="ti ti-external-link" style="font-size:18px"></i>Voir sur '+src+'</a>';
+  html2 += '</div>';
+  document.getElementById('modal-inner').innerHTML = html2;
   document.getElementById('modal-bg').classList.add('open');
 }
 
